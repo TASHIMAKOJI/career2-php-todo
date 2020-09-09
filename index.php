@@ -57,7 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </thead>
             <tbody>
             <?php
-            foreach ($todo_list as $todo) {
+            foreach ($todo_list as $todo) 
+            {
                 ?>
                 <tr>
                     <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>">
@@ -67,7 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <label>
                                 <select name="status" class="form-control">
                                     <?php
-                                    foreach (Todo::STATUS as $key => $label) {
+                                    foreach (Todo::STATUS as $key => $label) 
+                                    {
                                         $is_selected = $key === $todo["status"] ? "selected": "";
                                         echo "<option value='$key' $is_selected>$label</option>";
                                     }
