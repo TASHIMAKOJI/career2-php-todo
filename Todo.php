@@ -53,4 +53,23 @@ class Todo
         $stmt->execute();
     }
 
+    //消去
+    public function delete()
+    {
+        $sql = "UPDATE `todo` SET `deleted_at` = NOW()";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->execute();
+    }
+    
+
+    //変更
+    public function update(int $id, int $status)
+    {
+        $sql = "UPDATE `todo` SET status = :status WHERE id = :id";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
 }
