@@ -53,16 +53,11 @@ class Todo
         $stmt->execute();
     }
 
-    //消去
-    public function delete()
-    {
-        $sql = "UPDATE `todo` SET `deleted_at` = NOW()";
-        $stmt = $this->dbh->prepare($sql);
-        $stmt->execute();
-    }
-    
-
-    //変更
+    /**
+     * タスクを更新する
+     * @param int $id
+     * @param int $status
+     */
     public function update(int $id, int $status)
     {
         $sql = "UPDATE `todo` SET status = :status WHERE id = :id";
@@ -72,4 +67,25 @@ class Todo
         $stmt->execute();
     }
 
+    /**
+     * タスクを全削除する
+     */
+    public function deleteAll()
+    {
+        $sql = "UPDATE `todo` SET `deleted_at` = NOW()";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->execute();
+    }
+
+    /**
+     * タスクを削除する
+     * @param int $id
+     */
+    public function delete(int $id)
+    {
+        $sql = "UPDATE `todo` SET `deleted_at` = NOW() WHERE id = :id";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }
