@@ -54,8 +54,7 @@ class Todo
             // アップロードされたファイルの拡張子を取得
             $image .= '.' . substr(strrchr($image_file['name'], '.'), 1);
             // uploadディレクトリにファイル保存
-//            move_uploaded_file($image_file['tmp_name'], './upload/' . $image);
-            move_uploaded_file($image_file['tmp_name'], './' . $image);
+            move_uploaded_file($image_file['tmp_name'], './upload/' . $image);
         }
         $stmt = $this->dbh->prepare("INSERT INTO `todo` (title, due_date) VALUES (:title, :due_date)");
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
@@ -70,13 +69,6 @@ class Todo
      */
     public function update(int $id, int $status)
     {
-        if(image_file !== NULL)
-        {
-
-
-
-        }
-
         $sql = "UPDATE `todo` SET status = :status WHERE id = :id";
         $stmt = $this->dbh->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
